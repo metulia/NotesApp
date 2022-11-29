@@ -5,8 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".NotesFragment">
 
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/header_title"
+        />
+
     <LinearLayout
-        android:id="@+id/data_container"
+        android:id="@+id/notes_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

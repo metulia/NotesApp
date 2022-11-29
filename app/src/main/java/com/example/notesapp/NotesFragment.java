@@ -1,10 +1,13 @@
 package com.example.notesapp;
 
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -64,8 +67,16 @@ public class NotesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_notes, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initNotes(view.findViewById(R.id.notes_container));
+    }
+
     private boolean isLandscape () {
-        return getResources().
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
