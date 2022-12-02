@@ -15,16 +15,19 @@ import android.widget.TextView;
 
 public class NoteFragment extends Fragment {
 
-    static final String ARG_INDEX = "index";
+    //static final String ARG_INDEX = "index";
+    static final String SELECTED_NOTE = "note";
+    private Note note;
 
     public NoteFragment() {
         // Required empty public constructor
     }
 
-    public static NoteFragment newInstance(int index) {
+    public static NoteFragment newInstance(Note note) {
         NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_INDEX, index);
+        //args.putInt(ARG_INDEX, index);
+        args.putParcelable(SELECTED_NOTE, note);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,13 +54,14 @@ public class NoteFragment extends Fragment {
 
         Bundle arguments = getArguments();
         if (arguments != null) {
-            int index = arguments.getInt(ARG_INDEX);
+            //int index = arguments.getInt(ARG_INDEX);
+            note = arguments.getParcelable(SELECTED_NOTE);
 
             TextView tvTitle = view.findViewById(R.id.tvTitle);
-            tvTitle.setText(Note.getNotes()[index].getTitle());
+            tvTitle.setText(note.getTitle());
 
             TextView tvDescription = view.findViewById(R.id.tvDescription);
-            tvDescription.setText(Note.getNotes()[index].getDescription());
+            tvDescription.setText(note.getDescription());
         }
     }
 }

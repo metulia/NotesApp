@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="@string/header_title"
+        android:textSize="22sp"
         />
 
     <LinearLayout

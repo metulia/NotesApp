@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -21,8 +20,9 @@ import android.widget.TextView;
 
 public class NotesFragment extends Fragment {
 
-    static final String SELECTED_INDEX = "index";
-    private int selectedIndex = 0;
+    //static final String SELECTED_INDEX = "index";
+    static final String SELECTED_NOTE = "note";
+    //private int selectedIndex = 0;
     private Note note;
 
     public NotesFragment() {
@@ -31,7 +31,8 @@ public class NotesFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(SELECTED_INDEX, selectedIndex);
+        //outState.putInt(SELECTED_INDEX, selectedIndex);
+        outState.putParcelable(SELECTED_NOTE, note);
         super.onSaveInstanceState(outState);
     }
 
@@ -53,13 +54,14 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (savedInstanceState != null) {
-            selectedIndex = savedInstanceState.getInt(SELECTED_INDEX, 0);
+            //selectedIndex = savedInstanceState.getInt(SELECTED_INDEX, 0);
+            note = savedInstanceState.getParcelable(SELECTED_NOTE);
         }
 
         initNotes(view.findViewById(R.id.notes_container));
 
         if (isLandscape()) {
-            showLandNoteDetails(selectedIndex);
+            showLandNoteDetails(note);
         }
     }
 
@@ -79,31 +81,31 @@ public class NotesFragment extends Fragment {
 
             final int index = i;
             tv.setOnClickListener(v -> {
-                showNoteDetails(index);
+                showNoteDetails(Note.getNotes()[index]);
             });
         }
     }
 
-    private void showNoteDetails(int index) {
-        selectedIndex = index;
+    private void showNoteDetails(Note note) {
+        this.note = note;
         if (isLandscape()) {
-            showLandNoteDetails(index);
-        } else showPortNoteDetails(index);
+            showLandNoteDetails(note);
+        } else showPortNoteDetails(note);
     }
 
-    private void showPortNoteDetails(int index) {
+    private void showPortNoteDetails(Note note) {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, NoteFragment.newInstance(index));
+        fragmentTransaction.add(R.id.fragment_container, NoteFragment.newInstance(note));
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
 
-    private void showLandNoteDetails(int index) {
+    private void showLandNoteDetails(Note note) {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment2_container, NoteFragment.newInstance(index));
+        fragmentTransaction.replace(R.id.fragment2_container, NoteFragment.newInstance(note));
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
