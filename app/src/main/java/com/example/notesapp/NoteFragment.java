@@ -53,14 +53,17 @@ public class NoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Bundle arguments = getArguments();
+
         if (arguments != null) {
             //int index = arguments.getInt(ARG_INDEX);
             note = arguments.getParcelable(SELECTED_NOTE);
 
             TextView tvTitle = view.findViewById(R.id.tvTitle);
+            //tvTitle.setText(Note.getNotes()[index].getTitle());
             tvTitle.setText(note.getTitle());
 
             TextView tvDescription = view.findViewById(R.id.tvDescription);
+            //tvDescription.setText(Note.getNotes()[index].getDescription());
             tvDescription.setText(note.getDescription());
         }
 
