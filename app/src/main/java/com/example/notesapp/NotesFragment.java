@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 public class NotesFragment extends Fragment {
 
     //static final String SELECTED_INDEX = "index";
@@ -63,6 +65,18 @@ public class NotesFragment extends Fragment {
         if (isLandscape()) {
             showLandNoteDetails(note);
         }
+
+        MaterialButton calendarButton = view.findViewById(R.id.calendar_button);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new CalendarFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+        });
     }
 
     private boolean isLandscape() {
@@ -75,7 +89,7 @@ public class NotesFragment extends Fragment {
         for (int i = 0; i < Note.getNotes().length; i++) {
             TextView tv = new TextView(getContext());
             tv.setText(Note.getNotes()[i].getTitle());
-            tv.setTextSize(35);
+            tv.setTextSize(18);
             tv.setTypeface(Typeface.SERIF);
             layoutView.addView(tv);
 
@@ -94,12 +108,12 @@ public class NotesFragment extends Fragment {
     }
 
     private void showPortNoteDetails(Note note) {
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, NoteFragment.newInstance(note));
-        fragmentTransaction.addToBackStack("");
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, NoteFragment.newInstance(note))
+                .addToBackStack("")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
     }
 
     private void showLandNoteDetails(Note note) {
