@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:orientation="vertical"
     tools:context=".NoteFragment">
 
@@ -11,6 +10,8 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
         android:textColor="@color/hot_pink"
         android:textSize="@dimen/tv_title_size">
 
@@ -20,6 +21,8 @@
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
         android:textColor="@color/light_pink"
         android:textSize="@dimen/tv_description_size">
 

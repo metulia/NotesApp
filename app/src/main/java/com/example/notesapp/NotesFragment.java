@@ -96,7 +96,7 @@ public class NotesFragment extends Fragment {
     private void showPortNoteDetails(Note note) {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, NoteFragment.newInstance(note));
+        fragmentTransaction.replace(R.id.fragment_container, NoteFragment.newInstance(note));
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
