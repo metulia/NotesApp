@@ -16,7 +16,7 @@
         android:textSize="22sp" />
 
     <LinearLayout
-        android:id="@+id/notes_container"
+        android:id="@+id/data_list_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"

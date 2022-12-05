@@ -3,4 +3,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="header_title">Заметки</string>
     <string name="calendar_button">Календарь</string>
+    <string name="tvLink">Посмотреть ссылку для перехода на сайт Geekbrains</string>
+    <string name="tv_note_child">https://gb.ru/</string>
 </resources>

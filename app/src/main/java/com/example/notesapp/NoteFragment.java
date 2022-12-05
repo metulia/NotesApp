@@ -63,5 +63,18 @@ public class NoteFragment extends Fragment {
             TextView tvDescription = view.findViewById(R.id.tvDescription);
             tvDescription.setText(note.getDescription());
         }
+
+        TextView tvForLink = view.findViewById(R.id.tvLink);
+        tvForLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // requireParentFragment().getChildFragmentManager() ----->> НЕ ПОНИМАЮ, ПОЧЕМУ ЭТА ИНСТРУКЦИЯ НЕ РАБОТАЕТ
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.note_child_link_container, new NoteChildFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+        });
     }
 }

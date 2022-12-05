@@ -60,7 +60,7 @@ public class NotesFragment extends Fragment {
             note = savedInstanceState.getParcelable(SELECTED_NOTE);
         }
 
-        initNotes(view.findViewById(R.id.notes_container));
+        initNotes(view.findViewById(R.id.data_list_container));
 
         if (isLandscape()) {
             showLandNoteDetails(note);
@@ -72,7 +72,7 @@ public class NotesFragment extends Fragment {
             public void onClick(View view) {
                 requireActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new CalendarFragment())
+                        .replace(R.id.notes_container, new CalendarFragment())
                         .addToBackStack("")
                         .commit();
             }
@@ -110,7 +110,7 @@ public class NotesFragment extends Fragment {
     private void showPortNoteDetails(Note note) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, NoteFragment.newInstance(note))
+                .replace(R.id.notes_container, NoteFragment.newInstance(note))
                 .addToBackStack("")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
@@ -119,7 +119,7 @@ public class NotesFragment extends Fragment {
     private void showLandNoteDetails(Note note) {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment2_container, NoteFragment.newInstance(note));
+        fragmentTransaction.replace(R.id.note_container, NoteFragment.newInstance(note));
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
