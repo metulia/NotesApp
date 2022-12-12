@@ -2,6 +2,8 @@ package com.example.notesapp;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class Note {
+public class Note implements Parcelable {
 
     private static final Random random = new Random();
     private static Note[] notes;
@@ -54,7 +56,7 @@ public class Note {
     // инициализатор массива заметок
     static {
         notes = new Note[10];
-        for (int i=0; i< notes.length; i++) {
+        for (int i = 0; i < notes.length; i++) {
             notes[i] = Note.createNote(i);
         }
     }
@@ -67,4 +69,32 @@ public class Note {
         LocalDateTime dateOfCreation = LocalDateTime.now().plusDays(-random.nextInt(5));
         return new Note(title, description, dateOfCreation);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(getTitle());
+        parcel.writeString(getDescription());
+    }
+
+    protected Note(Parcel parcel) {
+        title = parcel.readString();
+        description = parcel.readString();
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel parcel) {
+            return new Note(parcel);
+        }
+
+        @Override
+        public Note[] newArray(int i) {
+            return new Note[i];
+        }
+    };
 }
