@@ -7,4 +7,5 @@
     <string name="tv_note_child">https://gb.ru/</string>
     <string name="exit">Выход</string>
     <string name="calendar">Календарь</string>
+    <string name="drawer_header_title">Навигационное меню</string>
 </resources>
