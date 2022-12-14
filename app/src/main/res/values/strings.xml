@@ -8,4 +8,6 @@
     <string name="exit">Выход</string>
     <string name="calendar">Календарь</string>
     <string name="drawer_header_title">Навигационное меню</string>
+    <string name="navigation_drawer_open">Открытие</string>
+    <string name="navigation_drawer_close">Закрытие</string>
 </resources>

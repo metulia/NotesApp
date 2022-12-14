@@ -65,18 +65,6 @@ public class NotesFragment extends Fragment {
         if (isLandscape()) {
             showLandNoteDetails(note);
         }
-
-        MaterialButton calendarButton = view.findViewById(R.id.calendar_button);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.notes_container, new CalendarFragment())
-                        .addToBackStack("")
-                        .commit();
-            }
-        });
     }
 
     private boolean isLandscape() {
