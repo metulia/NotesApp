@@ -30,10 +30,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDrawer() {
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        /*ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();*/
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                                 .addToBackStack("")
                                 .replace(R.id.notes_container, new CalendarFragment())
                                 .commit();
+                        drawerLayout.close();
                         return true;
 
                     case R.id.action_exit:
