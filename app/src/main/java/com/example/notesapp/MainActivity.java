@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
-        /*ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();*/
+        actionBarDrawerToggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
