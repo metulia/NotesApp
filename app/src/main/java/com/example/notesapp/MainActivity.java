@@ -60,7 +60,19 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.action_exit:
-                        finish();
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Внимание!")
+                                .setMessage("Вы действительно хотите завершить работу приложения?")
+                                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        Toast.makeText(MainActivity.this,
+                                                "Работа с приложением завершена", Toast.LENGTH_LONG).show();
+                                    }
+                                })
+                                .setNegativeButton("Нет", null)
+                                .show();
                         return true;
                 }
                 return false;
