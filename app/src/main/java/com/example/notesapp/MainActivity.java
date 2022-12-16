@@ -104,19 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_exit:
-                new AlertDialog.Builder(this)
-                        .setTitle("Внимание!")
-                        .setMessage("Вы действительно хотите закрыть приложение?")
-                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                                Toast.makeText(MainActivity.this, "Работа с приложением завершена",
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .setNegativeButton("Нет", null)
-                        .show();
+                new MyAlertDialogFragment().show(getSupportFragmentManager(), MyAlertDialogFragment.TAG);
                 return true;
         }
         return super.onOptionsItemSelected(item);
