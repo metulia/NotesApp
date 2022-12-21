@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
 import android.content.res.Configuration;
@@ -26,9 +27,21 @@ public class MainActivity extends AppCompatActivity {
             initDrawer();
         }
 
+        /*
         if (savedInstanceState == null) getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.notes_container, new NotesFragment())
+                .commit();
+
+         */
+        if (savedInstanceState == null) addFragment(ListFragment.newInstance());
+    }
+
+    private void addFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.notes_container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
