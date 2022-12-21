@@ -53,6 +53,11 @@ public class Note implements Parcelable {
         this.dateOfCreation = dateOfCreation;
     }
 
+    public Note(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     // инициализатор массива заметок
     static {
         notes = new Note[10];
