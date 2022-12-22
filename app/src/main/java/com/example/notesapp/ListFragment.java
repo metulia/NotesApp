@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -46,5 +48,10 @@ public class ListFragment extends Fragment {
 
         ListAdapter listAdapter = new ListAdapter(data);
         recyclerView.setAdapter(listAdapter);
+
+        DividerItemDecoration itemItemDecoration = new
+                DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        itemItemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
+        recyclerView.addItemDecoration(itemItemDecoration);
     }
 }
