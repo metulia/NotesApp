@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class ListFragment extends Fragment {
     private NotesSource data;
     private ListAdapter adapter;
     private RecyclerView recyclerView;
+    private static int DURATION = 5000;
 
     public static ListFragment newInstance() {
         return new ListFragment();
@@ -50,6 +52,7 @@ public class ListFragment extends Fragment {
                         R.drawable.nature11, false));
                 adapter.notifyItemInserted(data.size() - 1);
                 recyclerView.scrollToPosition(data.size() - 1);
+                recyclerView.smoothScrollToPosition(data.size() - 1);
                 return true;
 
             case R.id.action_clear:
@@ -96,6 +99,11 @@ public class ListFragment extends Fragment {
                 DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         itemItemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
         recyclerView.addItemDecoration(itemItemDecoration);
+
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        defaultItemAnimator.setAddDuration(DURATION);
+        defaultItemAnimator.setRemoveDuration(DURATION);
+        recyclerView.setItemAnimator(defaultItemAnimator);
 
         adapter.setItemClickListener(new OnItemClickListener() {
             @Override

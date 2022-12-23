@@ -64,7 +64,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         private TextView noteDescription;
         private AppCompatImageView noteImage;
         private CheckBox noteLike;
-        private int menuPosition;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
