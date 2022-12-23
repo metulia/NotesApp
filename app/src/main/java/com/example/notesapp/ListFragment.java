@@ -4,12 +4,14 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -86,7 +88,7 @@ public class ListFragment extends Fragment {
 
     private void initRecyclerView() {
 
-        adapter = new ListAdapter(data);
+        adapter = new ListAdapter(data, this);
 
         recyclerView.setAdapter(adapter);
 
@@ -102,5 +104,38 @@ public class ListFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
+                                    @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+
+        requireActivity().getMenuInflater().inflate(R.menu.note_menu, menu);
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        int position = adapter.getMenuPosition();
+
+        switch (item.getItemId()) {
+
+            case R.id.action_update:
+
+                Note note = data.getNote(position);
+                data.updateNote(position, new Note("Элемент " + position, note.getDescription(),
+                        note.getPicture(), note.isLike()));
+                adapter.notifyItemChanged(position);
+                return true;
+
+            case R.id.action_delete:
+                data.deleteNote(position);
+                adapter.notifyItemRemoved(position);
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 }
