@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ListFragment extends Fragment {
 
@@ -53,5 +55,13 @@ public class ListFragment extends Fragment {
                 DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         itemItemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
         recyclerView.addItemDecoration(itemItemDecoration);
+
+        listAdapter.setItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getContext(), String.format("Позиция - %d", position),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -25,4 +25,17 @@
         <item>@string/description9</item>
         <item>@string/description10</item>
     </string-array>
+
+    <array name="pictures">
+        <item>@drawable/nature1</item>
+        <item>@drawable/nature2</item>
+        <item>@drawable/nature3</item>
+        <item>@drawable/nature4</item>
+        <item>@drawable/nature5</item>
+        <item>@drawable/nature6</item>
+        <item>@drawable/nature7</item>
+        <item>@drawable/nature8</item>
+        <item>@drawable/nature9</item>
+        <item>@drawable/nature10</item>
+    </array>
 </resources>

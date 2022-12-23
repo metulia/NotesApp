@@ -1,6 +1,7 @@
 package com.example.notesapp;
 
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -18,12 +19,23 @@ public class NotesSourceImpl implements NotesSource {
         dataSource = new ArrayList<>(10);
     }
 
+    private int[] getImageArray() {
+        TypedArray pictures = resources.obtainTypedArray(R.array.pictures);
+        int length = pictures.length();
+        int[] answer = new int[length];
+        for (int i = 0; i < length; i++) {
+            answer[i] = pictures.getResourceId(i, 0);
+        }
+        return answer;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public NotesSourceImpl init() {
         String[] titles = resources.getStringArray(R.array.titles);
         String[] descriptions = resources.getStringArray(R.array.descriptions);
+        int[] pictures = getImageArray();
         for (int i = 0; i < 10; i++) {
-            dataSource.add(new Note(titles[i], descriptions[i]));
+            dataSource.add(new Note(titles[i], descriptions[i], pictures[i], false));
         }
         return this;
     }
