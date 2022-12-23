@@ -32,4 +32,6 @@
     <string name="description10">Описание заметки #10</string>
     <string name="add">Добавить</string>
     <string name="clear">Очистить</string>
+    <string name="update">Обновить</string>
+    <string name="delete">Удалить</string>
 </resources>
