@@ -30,4 +30,6 @@
     <string name="description8">Описание заметки #8</string>
     <string name="description9">Описание заметки #9</string>
     <string name="description10">Описание заметки #10</string>
+    <string name="add">Добавить</string>
+    <string name="clear">Очистить</string>
 </resources>
