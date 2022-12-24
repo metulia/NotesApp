@@ -2,13 +2,16 @@ package com.example.notesapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -57,7 +60,19 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.action_exit:
-                        finish();
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Внимание!")
+                                .setMessage("Вы действительно хотите завершить работу приложения?")
+                                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        Toast.makeText(MainActivity.this,
+                                                "Работа с приложением завершена", Toast.LENGTH_LONG).show();
+                                    }
+                                })
+                                .setNegativeButton("Нет", null)
+                                .show();
                         return true;
                 }
                 return false;
@@ -89,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_exit:
-                finish();
+                new MyAlertDialogFragment().show(getSupportFragmentManager(), MyAlertDialogFragment.TAG);
                 return true;
         }
         return super.onOptionsItemSelected(item);
