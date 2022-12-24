@@ -17,6 +17,8 @@ public class Note implements Parcelable {
     private static Note[] notes;
     private String title;
     private String description;
+    private int picture;
+    private boolean like;
     private LocalDateTime dateOfCreation;
 
     public void setTitle(String title) {
@@ -31,6 +33,14 @@ public class Note implements Parcelable {
         this.dateOfCreation = dateOfCreation;
     }
 
+    public void setPicture(int picture) {
+        this.picture = picture;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
+    }
+
     public static Note[] getNotes() {
         return notes;
     }
@@ -43,6 +53,14 @@ public class Note implements Parcelable {
         return description;
     }
 
+    public int getPicture() {
+        return picture;
+    }
+
+    public boolean isLike() {
+        return like;
+    }
+
     public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
@@ -51,6 +69,18 @@ public class Note implements Parcelable {
         this.title = title;
         this.description = description;
         this.dateOfCreation = dateOfCreation;
+    }
+
+    public Note(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Note(String title, String description, int picture, boolean like) {
+        this.title = title;
+        this.description = description;
+        this.picture = picture;
+        this.like = like;
     }
 
     // инициализатор массива заметок
