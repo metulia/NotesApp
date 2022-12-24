@@ -16,13 +16,26 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     NotesSource dataSource;
     private OnItemClickListener itemClickListener;
+    private ListFragment fragment;
+    private int menuPosition;
+
+    public ListAdapter(NotesSource dataSource, ListFragment fragment) {
+        this.dataSource = dataSource;
+        this.fragment = fragment;
+    }
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
+
+    private void registerContextMenu(View itemView) {
+        if (fragment != null) {
+            fragment.registerForContextMenu(itemView);
+        }
+    }
 
     public void setItemClickListener(OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
-    }
-
-    public ListAdapter(NotesSource dataSource) {
-        this.dataSource = dataSource;
     }
 
     @NonNull
@@ -36,7 +49,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setData(dataSource.getNoteData(position));
+        holder.setData(dataSource.getNote(position));
     }
 
     @Override
@@ -49,17 +62,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         private TextView noteTitle;
         private TextView noteDescription;
-        private AppCompatImageView image;
-        private CheckBox like;
+        private AppCompatImageView noteImage;
+        private CheckBox noteLike;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             noteTitle = itemView.findViewById(R.id.note_title);
             noteDescription = itemView.findViewById(R.id.note_description);
-            image = itemView.findViewById(R.id.image_view);
-            like = itemView.findViewById(R.id.like);
+            noteImage = itemView.findViewById(R.id.image_view);
+            noteLike = itemView.findViewById(R.id.like);
 
-            image.setOnClickListener(new View.OnClickListener() {
+            registerContextMenu(itemView);
+
+            noteImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
@@ -68,14 +83,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     }
                 }
             });
+
+            noteImage.setOnLongClickListener(new View.OnLongClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public boolean onLongClick(View view) {
+                    menuPosition = getLayoutPosition();
+                    itemView.showContextMenu(15, 15);
+                    return true;
+                }
+            });
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         public void setData(Note note) {
             noteTitle.setText(note.getTitle());
             noteDescription.setText(note.getDescription());
-            image.setImageResource(note.getPicture());
-            like.setChecked(note.isLike());
+            noteImage.setImageResource(note.getPicture());
+            noteLike.setChecked(note.isLike());
         }
     }
 }
