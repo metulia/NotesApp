@@ -1,8 +1,16 @@
 package com.example.notesapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,9 +19,79 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (!isLandscape()) {
+            initDrawer();
+        }
+
         if (savedInstanceState == null) getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.notes_container, new NotesFragment())
                 .commit();
+    }
+
+    private void initDrawer() {
+
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.action_calendar:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .addToBackStack("")
+                                .replace(R.id.notes_container, new CalendarFragment())
+                                .commit();
+                        drawerLayout.close();
+                        return true;
+
+                    case R.id.action_exit:
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private boolean isLandscape() {
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_calendar:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack("")
+                        .replace(R.id.notes_container, new CalendarFragment())
+                        .commit();
+                return true;
+
+            case R.id.action_exit:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

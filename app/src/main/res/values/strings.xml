@@ -5,4 +5,9 @@
     <string name="calendar_button">Календарь</string>
     <string name="tvLink">Посмотреть ссылку для перехода на сайт Geekbrains</string>
     <string name="tv_note_child">https://gb.ru/</string>
+    <string name="exit">Выход</string>
+    <string name="calendar">Календарь</string>
+    <string name="drawer_header_title">Навигационное меню</string>
+    <string name="navigation_drawer_open">Открытие</string>
+    <string name="navigation_drawer_close">Закрытие</string>
 </resources>

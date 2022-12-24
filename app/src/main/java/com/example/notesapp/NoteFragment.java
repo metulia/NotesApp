@@ -71,7 +71,7 @@ public class NoteFragment extends Fragment {
         tvForLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // requireParentFragment().getChildFragmentManager() ----->> НЕ ПОНИМАЮ, ПОЧЕМУ ЭТА ИНСТРУКЦИЯ НЕ РАБОТАЕТ
+                // requireParentFragment().getChildFragmentManager()
                 requireActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.note_child_link_container, new NoteChildFragment())
