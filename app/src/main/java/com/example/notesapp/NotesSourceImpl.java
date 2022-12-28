@@ -16,7 +16,7 @@ public class NotesSourceImpl implements NotesSource {
 
     public NotesSourceImpl(/*Resources resources*/) {
         //this.resources = resources;
-        dataSource = new ArrayList<>(10);
+        dataSource = new ArrayList<>();
     }
 
     /*

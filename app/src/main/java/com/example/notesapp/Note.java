@@ -47,12 +47,15 @@ public class Note /*implements Parcelable*/ {
         this.description = description;
     }
 
+    /*
     public Note(String title, String description, int picture, boolean like) {
         this.title = title;
         this.description = description;
         this.picture = picture;
         this.like = like;
     }
+
+     */
 
     public Note(String title, String description, int picture, boolean like, Date dateOfCreation) {
         this.title = title;

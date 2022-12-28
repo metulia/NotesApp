@@ -104,13 +104,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             });
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
         public void setData(Note note) {
             noteTitle.setText(note.getTitle());
             noteDescription.setText(note.getDescription());
             noteImage.setImageResource(note.getPicture());
             noteLike.setChecked(note.isLike());
-            noteDateOfCreation.setText(new Date().toString());
+            noteDateOfCreation.setText(note.getDateOfCreation().toString());
         }
     }
 }

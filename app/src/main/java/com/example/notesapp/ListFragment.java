@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 
 public class ListFragment extends Fragment {
@@ -62,7 +63,7 @@ public class ListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_add:
                 data.addNote(new Note("Новая заметка #" + data.size(), "Описание заметки #" + data.size(),
-                        R.drawable.nature11, false));
+                        R.drawable.nature11, false, new Date()));
                 adapter.notifyItemInserted(data.size() - 1);
                 recyclerView.scrollToPosition(data.size() - 1);
                 recyclerView.smoothScrollToPosition(data.size() - 1);
@@ -175,7 +176,7 @@ public class ListFragment extends Fragment {
 
                 Note note = data.getNote(position);
                 data.updateNote(position, new Note("Элемент " + position, note.getDescription(),
-                        note.getPicture(), note.isLike()));
+                        note.getPicture(), note.isLike(), new Date()));
                 adapter.notifyItemChanged(position);
 
                 String jsonNoteDataAfterUpdate = new GsonBuilder().create().toJson(data.getNoteData());
