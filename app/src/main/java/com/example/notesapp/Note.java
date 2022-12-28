@@ -1,49 +1,26 @@
 package com.example.notesapp;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.RequiresApi;
-
 import java.time.LocalDateTime;
-import java.util.Random;
+import java.util.Date;
 
-@RequiresApi(api = Build.VERSION_CODES.O)
-public class Note implements Parcelable {
+public class Note /*implements Parcelable*/ {
 
-    private static final Random random = new Random();
-    private static Note[] notes;
+    //private static final Random random = new Random();
+    //private static Note[] notes;
+
     private String title;
     private String description;
     private int picture;
     private boolean like;
-    private LocalDateTime dateOfCreation;
+    private Date dateOfCreation;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
-    }
-
-    public void setPicture(int picture) {
-        this.picture = picture;
-    }
-
-    public void setLike(boolean like) {
-        this.like = like;
-    }
-
-    public static Note[] getNotes() {
+    /*public static Note[] getNotes() {
         return notes;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -61,14 +38,8 @@ public class Note implements Parcelable {
         return like;
     }
 
-    public LocalDateTime getDateOfCreation() {
+    public Date getDateOfCreation() {
         return dateOfCreation;
-    }
-
-    public Note(String title, String description, LocalDateTime dateOfCreation) {
-        this.title = title;
-        this.description = description;
-        this.dateOfCreation = dateOfCreation;
     }
 
     public Note(String title, String description) {
@@ -76,6 +47,7 @@ public class Note implements Parcelable {
         this.description = description;
     }
 
+    /*
     public Note(String title, String description, int picture, boolean like) {
         this.title = title;
         this.description = description;
@@ -83,6 +55,17 @@ public class Note implements Parcelable {
         this.like = like;
     }
 
+     */
+
+    public Note(String title, String description, int picture, boolean like, Date dateOfCreation) {
+        this.title = title;
+        this.description = description;
+        this.picture = picture;
+        this.like = like;
+        this.dateOfCreation = dateOfCreation;
+    }
+
+    /*
     // инициализатор массива заметок
     static {
         notes = new Note[10];
@@ -127,4 +110,6 @@ public class Note implements Parcelable {
             return new Note[i];
         }
     };
+
+     */
 }

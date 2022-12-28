@@ -51,6 +51,14 @@
             android:textColor="@color/light_pink"
             android:textSize="@dimen/tv_description_size" />
 
+        <TextView
+            android:id="@+id/note_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

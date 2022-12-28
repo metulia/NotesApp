@@ -12,6 +12,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Date;
+import java.util.List;
+
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     NotesSource dataSource;
@@ -22,6 +25,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public ListAdapter(NotesSource dataSource, ListFragment fragment) {
         this.dataSource = dataSource;
         this.fragment = fragment;
+    }
+
+    public void setNewData(List<Note> dataSource) {
+        this.dataSource.setNewData(dataSource);
+        notifyDataSetChanged();
     }
 
     public int getMenuPosition() {
@@ -57,13 +65,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return dataSource.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView noteTitle;
         private TextView noteDescription;
         private AppCompatImageView noteImage;
         private CheckBox noteLike;
+        private TextView noteDateOfCreation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +79,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             noteDescription = itemView.findViewById(R.id.note_description);
             noteImage = itemView.findViewById(R.id.image_view);
             noteLike = itemView.findViewById(R.id.like);
+            noteDateOfCreation = itemView.findViewById(R.id.note_date);
 
             registerContextMenu(itemView);
 
@@ -95,12 +104,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             });
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
         public void setData(Note note) {
             noteTitle.setText(note.getTitle());
             noteDescription.setText(note.getDescription());
             noteImage.setImageResource(note.getPicture());
             noteLike.setChecked(note.isLike());
+            noteDateOfCreation.setText(note.getDateOfCreation().toString());
         }
     }
 }

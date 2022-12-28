@@ -8,14 +8,7 @@
 
     <FrameLayout
         android:id="@+id/notes_container"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
-    <FrameLayout
-        android:id="@+id/note_container"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1.5" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

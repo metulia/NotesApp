@@ -12,13 +12,14 @@ import java.util.List;
 public class NotesSourceImpl implements NotesSource {
 
     private List<Note> dataSource;
-    private Resources resources;
+    //private Resources resources;
 
-    public NotesSourceImpl(Resources resources) {
-        this.resources = resources;
-        dataSource = new ArrayList<>(10);
+    public NotesSourceImpl(/*Resources resources*/) {
+        //this.resources = resources;
+        dataSource = new ArrayList<>();
     }
 
+    /*
     private int[] getImageArray() {
         TypedArray pictures = resources.obtainTypedArray(R.array.pictures);
         int length = pictures.length();
@@ -28,7 +29,9 @@ public class NotesSourceImpl implements NotesSource {
         }
         return answer;
     }
+     */
 
+    /*
     @RequiresApi(api = Build.VERSION_CODES.O)
     public NotesSourceImpl init() {
         String[] titles = resources.getStringArray(R.array.titles);
@@ -39,6 +42,7 @@ public class NotesSourceImpl implements NotesSource {
         }
         return this;
     }
+     */
 
     @Override
     public Note getNote(int position) {
@@ -68,5 +72,15 @@ public class NotesSourceImpl implements NotesSource {
     @Override
     public void clear() {
         dataSource.clear();
+    }
+
+    @Override
+    public void setNewData(List<Note> dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    public List<Note> getNoteData() {
+        return dataSource;
     }
 }

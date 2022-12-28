@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 public class NoteFragment extends Fragment {
 
+    /*
+
     //static final String ARG_INDEX = "index";
     static final String SELECTED_NOTE = "note";
     private Note note;
@@ -80,4 +82,5 @@ public class NoteFragment extends Fragment {
             }
         });
     }
+     */
 }

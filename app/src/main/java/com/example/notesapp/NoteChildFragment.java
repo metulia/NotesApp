@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 public class NoteChildFragment extends Fragment {
 
+    /*
+
     public NoteChildFragment() {
         // Required empty public constructor
     }
@@ -46,4 +48,6 @@ public class NoteChildFragment extends Fragment {
             }
         });
     }
+
+     */
 }
