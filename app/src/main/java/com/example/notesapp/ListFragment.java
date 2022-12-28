@@ -1,5 +1,6 @@
 package com.example.notesapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -68,7 +69,7 @@ public class ListFragment extends Fragment {
                 recyclerView.smoothScrollToPosition(data.size() - 1);
 
                 String jsonNoteDataAfterAdd = new GsonBuilder().create().toJson(data.getNoteData());
-                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterAdd);
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterAdd).apply();
 
                 return true;
 
@@ -77,7 +78,7 @@ public class ListFragment extends Fragment {
                 adapter.notifyDataSetChanged();
 
                 String jsonNoteDataAfterClear = new GsonBuilder().create().toJson(data.getNoteData());
-                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterClear);
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterClear).apply();
 
                 return true;
         }
@@ -106,7 +107,8 @@ public class ListFragment extends Fragment {
     private void initView(View view) {
 
         recyclerView = view.findViewById(R.id.recycler_view_lines);
-        data = new NotesSourceImpl(getResources()).init();
+        //data = new NotesSourceImpl(getResources()).init();
+        data = new NotesSourceImpl();
         initRecyclerView();
     }
 
@@ -127,6 +129,7 @@ public class ListFragment extends Fragment {
         defaultItemAnimator.setRemoveDuration(DURATION);
         recyclerView.setItemAnimator(defaultItemAnimator);
 
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         String savedData = sharedPreferences.getString(DATA_KEY, null);
         if (savedData == null) {
             Toast.makeText(getActivity(), "Empty data", Toast.LENGTH_LONG).show();
@@ -177,7 +180,7 @@ public class ListFragment extends Fragment {
                 adapter.notifyItemChanged(position);
 
                 String jsonNoteDataAfterUpdate = new GsonBuilder().create().toJson(data.getNoteData());
-                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterUpdate);
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterUpdate).apply();
 
                 return true;
 
@@ -186,7 +189,7 @@ public class ListFragment extends Fragment {
                 adapter.notifyItemRemoved(position);
 
                 String jsonNoteDataAfterDelete = new GsonBuilder().create().toJson(data.getNoteData());
-                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterDelete);
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterDelete).apply();
 
                 return true;
         }
