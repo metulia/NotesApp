@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Note /*implements Parcelable*/ {
 
@@ -15,27 +16,7 @@ public class Note /*implements Parcelable*/ {
     private String description;
     private int picture;
     private boolean like;
-    private LocalDateTime dateOfCreation;
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
-    }
-
-    public void setPicture(int picture) {
-        this.picture = picture;
-    }
-
-    public void setLike(boolean like) {
-        this.like = like;
-    }
+    private Date dateOfCreation;
 
     /*public static Note[] getNotes() {
         return notes;
@@ -57,7 +38,7 @@ public class Note /*implements Parcelable*/ {
         return like;
     }
 
-    public LocalDateTime getDateOfCreation() {
+    public Date getDateOfCreation() {
         return dateOfCreation;
     }
 
@@ -73,6 +54,13 @@ public class Note /*implements Parcelable*/ {
         this.like = like;
     }
 
+    public Note(String title, String description, int picture, boolean like, Date dateOfCreation) {
+        this.title = title;
+        this.description = description;
+        this.picture = picture;
+        this.like = like;
+        this.dateOfCreation = dateOfCreation;
+    }
 
     /*
     // инициализатор массива заметок

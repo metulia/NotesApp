@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Date;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
@@ -70,6 +71,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         private TextView noteDescription;
         private AppCompatImageView noteImage;
         private CheckBox noteLike;
+        private TextView noteDateOfCreation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +79,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             noteDescription = itemView.findViewById(R.id.note_description);
             noteImage = itemView.findViewById(R.id.image_view);
             noteLike = itemView.findViewById(R.id.like);
+            noteDateOfCreation = itemView.findViewById(R.id.note_date);
 
             registerContextMenu(itemView);
 
@@ -107,6 +110,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             noteDescription.setText(note.getDescription());
             noteImage.setImageResource(note.getPicture());
             noteLike.setChecked(note.isLike());
+            noteDateOfCreation.setText(new Date().toString());
         }
     }
 }

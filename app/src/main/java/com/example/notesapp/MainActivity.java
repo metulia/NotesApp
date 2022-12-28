@@ -111,19 +111,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_calendar:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack("")
-                        .replace(R.id.notes_container, new CalendarFragment())
-                        .commit();
-                return true;
-
-            case R.id.action_exit:
-                new MyAlertDialogFragment().show(getSupportFragmentManager(), MyAlertDialogFragment.TAG);
-                return true;
+        if (item.getItemId() == R.id.action_exit) {
+            new MyAlertDialogFragment().show(getSupportFragmentManager(), MyAlertDialogFragment.TAG);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
