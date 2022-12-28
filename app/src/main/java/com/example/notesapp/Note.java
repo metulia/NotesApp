@@ -83,6 +83,7 @@ public class Note implements Parcelable {
         this.like = like;
     }
 
+    /*
     // инициализатор массива заметок
     static {
         notes = new Note[10];
@@ -99,6 +100,7 @@ public class Note implements Parcelable {
         LocalDateTime dateOfCreation = LocalDateTime.now().plusDays(-random.nextInt(5));
         return new Note(title, description, dateOfCreation);
     }
+     */
 
     @Override
     public int describeContents() {

@@ -1,5 +1,7 @@
 package com.example.notesapp;
 
+import java.util.List;
+
 public interface NotesSource {
 
     Note getNote(int position);
@@ -13,6 +15,12 @@ public interface NotesSource {
     void addNote(Note note);
 
     void clear();
+
+    void setNewData (List<Note> dataSource);
+
+    List<Note> getNoteData ();
+
+
 
 
 }

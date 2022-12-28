@@ -69,4 +69,14 @@ public class NotesSourceImpl implements NotesSource {
     public void clear() {
         dataSource.clear();
     }
+
+    @Override
+    public void setNewData(List<Note> dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    public List<Note> getNoteData() {
+        return dataSource;
+    }
 }

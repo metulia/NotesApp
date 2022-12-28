@@ -12,6 +12,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     NotesSource dataSource;
@@ -22,6 +24,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public ListAdapter(NotesSource dataSource, ListFragment fragment) {
         this.dataSource = dataSource;
         this.fragment = fragment;
+    }
+
+    public void setNewData(List<Note> dataSource) {
+        this.dataSource.setNewData(dataSource);
+        notifyDataSetChanged();
     }
 
     public int getMenuPosition() {

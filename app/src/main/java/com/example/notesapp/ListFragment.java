@@ -1,5 +1,7 @@
 package com.example.notesapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -22,12 +24,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
 public class ListFragment extends Fragment {
 
     private NotesSource data;
     private ListAdapter adapter;
     private RecyclerView recyclerView;
-    private static int DURATION = 5000;
+    private static int DURATION = 2000;
+
+    private SharedPreferences sharedPreferences;
+    public static final String DATA_KEY = "DATA_KEY";
 
     public static ListFragment newInstance() {
         return new ListFragment();
@@ -46,6 +57,8 @@ public class ListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
         switch (item.getItemId()) {
             case R.id.action_add:
                 data.addNote(new Note("Новая заметка #" + data.size(), "Описание заметки #" + data.size(),
@@ -53,11 +66,19 @@ public class ListFragment extends Fragment {
                 adapter.notifyItemInserted(data.size() - 1);
                 recyclerView.scrollToPosition(data.size() - 1);
                 recyclerView.smoothScrollToPosition(data.size() - 1);
+
+                String jsonNoteDataAfterAdd = new GsonBuilder().create().toJson(data.getNoteData());
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterAdd);
+
                 return true;
 
             case R.id.action_clear:
                 data.clear();
                 adapter.notifyDataSetChanged();
+
+                String jsonNoteDataAfterClear = new GsonBuilder().create().toJson(data.getNoteData());
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterClear);
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -89,6 +110,7 @@ public class ListFragment extends Fragment {
         initRecyclerView();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void initRecyclerView() {
 
         adapter = new ListAdapter(data, this);
@@ -104,6 +126,19 @@ public class ListFragment extends Fragment {
         defaultItemAnimator.setAddDuration(DURATION);
         defaultItemAnimator.setRemoveDuration(DURATION);
         recyclerView.setItemAnimator(defaultItemAnimator);
+
+        String savedData = sharedPreferences.getString(DATA_KEY, null);
+        if (savedData == null) {
+            Toast.makeText(getActivity(), "Empty data", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                Type type = new TypeToken<List<Note>>() {
+                }.getType();
+                adapter.setNewData(new GsonBuilder().create().fromJson(savedData, type));
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+            }
+        }
 
         adapter.setItemClickListener(new OnItemClickListener() {
             @Override
@@ -127,6 +162,9 @@ public class ListFragment extends Fragment {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
+        //getActivity().getSharedPreferences();
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
         int position = adapter.getMenuPosition();
 
         switch (item.getItemId()) {
@@ -137,11 +175,19 @@ public class ListFragment extends Fragment {
                 data.updateNote(position, new Note("Элемент " + position, note.getDescription(),
                         note.getPicture(), note.isLike()));
                 adapter.notifyItemChanged(position);
+
+                String jsonNoteDataAfterUpdate = new GsonBuilder().create().toJson(data.getNoteData());
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterUpdate);
+
                 return true;
 
             case R.id.action_delete:
                 data.deleteNote(position);
                 adapter.notifyItemRemoved(position);
+
+                String jsonNoteDataAfterDelete = new GsonBuilder().create().toJson(data.getNoteData());
+                sharedPreferences.edit().putString(DATA_KEY, jsonNoteDataAfterDelete);
+
                 return true;
         }
         return super.onContextItemSelected(item);
