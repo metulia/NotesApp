@@ -22,6 +22,8 @@ import com.google.android.material.button.MaterialButton;
 
 public class NotesFragment extends Fragment {
 
+    /*
+
     //static final String SELECTED_INDEX = "index";
     static final String SELECTED_NOTE = "note";
     //private int selectedIndex = 0;
@@ -111,4 +113,6 @@ public class NotesFragment extends Fragment {
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
+
+     */
 }

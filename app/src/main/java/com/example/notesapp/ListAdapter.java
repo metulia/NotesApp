@@ -64,7 +64,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return dataSource.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView noteTitle;

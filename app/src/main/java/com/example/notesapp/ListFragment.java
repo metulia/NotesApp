@@ -46,7 +46,6 @@ public class ListFragment extends Fragment {
     }
 
     public ListFragment() {
-        // Required empty public constructor
     }
 
     @Override
